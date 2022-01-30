@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yanfang.woc.mapper.UserMapper">
+
+    <!--获取用户总数-->
+    <select id="getAmountOfAccounts" resultType="Integer">
+        select count(*) from account
+    </select>
+
+    <!--根据用户名删除用户-->
+    <delete id="deleteAccountByName">
+        delete from account where username=#{userName}
+    </delete>
+
+    <!--注册用户-->
+    <insert id="registerNewAccount">
+        insert into account(username, password, email) values (#{userName}, #{userPwd}, #{userEmail})
+    </insert>
+
+    <!--登录用户-->
+    <select id="loginAccount" resultType="java.lang.String">
+        select username from account where email=#{Email} and password=#{Password}
+    </select>
+
+    <!--根据username查询密码以核验-->
+    <select id="checkPwd" resultType="java.lang.String">
+        select password from account where username=#{userName}
+    </select>
+</mapper>
